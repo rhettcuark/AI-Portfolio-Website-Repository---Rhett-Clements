@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Rhett Clements Portfolio"
+description = "A personal portfolio site for Rhett Clements, an Information Systems Business Analytics student showcasing analytical thinking, communication, creative tools, and dependable work experience."
+version = "1.0.0"
+id = "artifacts/rhett-clements-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19444
+
+[services.development]
+run = "pnpm --filter @workspace/rhett-clements-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/rhett-clements-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/rhett-clements-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19444"
+BASE_PATH = "/"
