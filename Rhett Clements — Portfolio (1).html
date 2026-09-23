@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rhett Clements — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E2A22;
+    --paper:#ECE7D8;
+    --paper-alt:#E2DCC9;
+    --rule:#B9AF95;
+    --brick:#7A3B2E;
+    --pine:#3E5C50;
+    color-scheme: light;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top: calc(24px + env(safe-area-inset-top,0px));}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Source Serif 4', serif;
+    margin:0;
+    font-weight:600;
+  }
+  a{color:var(--brick);}
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding: 48px 24px 80px;
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap:48px;
+  }
+  @media (max-width:720px){
+    .wrap{grid-template-columns:1fr; padding:32px 20px 60px;}
+    .side{position:static !important; margin-bottom:8px;}
+  }
+  .side{
+    position:sticky;
+    top: calc(40px + env(safe-area-inset-top,0px));
+    align-self:start;
+  }
+  .side h1{font-size:1.7rem; line-height:1.15;}
+  .role{
+    margin-top:6px;
+    font-size:0.95rem;
+    color:var(--pine);
+    font-weight:500;
+  }
+  .side-rule{
+    height:2px; background:var(--brick);
+    width:40px; margin:18px 0;
+  }
+  nav{display:flex; flex-direction:column; gap:9px; margin-bottom:24px;}
+  nav a{
+    color:var(--ink); text-decoration:none; font-size:0.92rem;
+    border-left:2px solid transparent; padding-left:10px;
+  }
+  nav a:hover{border-left-color:var(--brick); color:var(--brick);}
+  .contact{font-size:0.85rem; color:#4b5347;}
+  .contact div{margin-bottom:6px;}
+  section{margin-bottom:56px; scroll-margin-top:32px;}
+  .sec-head{
+    display:flex; align-items:baseline; gap:12px;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:8px; margin-bottom:20px;
+  }
+  .sec-head h2{font-size:1.35rem; color:var(--brick);}
+  .lede{font-size:1.05rem; max-width:62ch;}
+  .entry{
+    display:grid; grid-template-columns: 1fr auto; gap:8px 16px;
+    padding:18px 0; border-top:1px solid var(--rule);
+  }
+  .entry:first-of-type{border-top:none;}
+  .entry h3{font-size:1.05rem;}
+  .entry .place{font-size:0.9rem; color:var(--pine); font-weight:500; margin-top:2px;}
+  .entry .when{font-size:0.85rem; color:#6b6757; white-space:nowrap; text-align:right;}
+  .entry ul{margin:10px 0 0; padding-left:18px; font-size:0.94rem;}
+  .entry li{margin-bottom:5px;}
+  .honors{list-style:none; margin:0; padding:0;}
+  .honors li{
+    display:grid; grid-template-columns: auto 1fr auto; gap:14px;
+    padding:12px 0; border-top:1px solid var(--rule);
+    font-size:0.95rem; align-items:baseline;
+  }
+  .honors li:first-child{border-top:none;}
+  .honors .mark{color:var(--brick); font-family:'Source Serif 4',serif; font-weight:700;}
+  .honors .when{color:#6b6757; font-size:0.85rem; text-align:right; white-space:nowrap;}
+  .skills{display:flex; flex-wrap:wrap; gap:10px;}
+  .skills span{
+    border:1px solid var(--rule); padding:7px 13px; border-radius:2px;
+    font-size:0.88rem; background:var(--paper-alt);
+  }
+  footer{
+    border-top:1px solid var(--rule); padding-top:18px;
+    font-size:0.85rem; color:#6b6757;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .entry, .honors li{transition:background 0.2s ease;}
+  }
+  a:focus-visible, nav a:focus-visible{outline:2px solid var(--brick); outline-offset:2px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="side">
+    <h1>Rhett Clements</h1>
+    <div class="role">Information Systems &amp; Business Analytics</div>
+    <div class="side-rule"></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#honors">Honors &amp; Awards</a>
+      <a href="#skills">Skillset</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="contact" id="contact">
+      <div>clementsrhett@gmail.com</div>
+      <div>479-806-2587</div>
+      <div>Greenwood, Arkansas</div>
+      <div><a href="https://www.linkedin.com/in/clementsrhettjba/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about">
+      <div class="sec-head"><h2>About</h2></div>
+      <p class="lede">Senior at the University of Arkansas's Sam M. Walton College of Business, studying Information Systems with a focus in Business Analytics. Comfortable across the Microsoft Office and Adobe suites, QuickBooks, and analytics tools including SAS Viya and Tableau — paired with years of hands-on work that built a strong, punctual work ethic and an easy way of working with people.</p>
+    </section>
+
+    <section id="experience">
+      <div class="sec-head"><h2>Experience</h2></div>
+      <div class="entry">
+        <div>
+          <h3>House Cleaner</h3>
+          <div class="place">Ronald Ragon Realty — Pea Ridge, Arkansas</div>
+        </div>
+        <div class="when">Jan 2022 – Present</div>
+        <ul>
+          <li>Swept, mopped, and vacuumed flooring across managed properties</li>
+          <li>Dusted and wiped down furniture, built-in surfaces, and appliances</li>
+          <li>Removed waste from office and bathroom areas</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div>
+          <h3>Landscaper / Construction Clean-up</h3>
+          <div class="place">Ronald Ragon Realty — Pea Ridge, Arkansas</div>
+        </div>
+        <div class="when">Jun 2019 – Aug 2021</div>
+        <ul>
+          <li>Watered trees, bushes, and greenery across housing development lots</li>
+          <li>Rearranged materials and cleaned construction debris from home interiors</li>
+          <li>Disposed of excess debris and tools left in construction zones</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sec-head"><h2>Education</h2></div>
+      <div class="entry">
+        <div>
+          <h3>University of Arkansas</h3>
+          <div class="place">Sam M. Walton College of Business — Fayetteville, Arkansas</div>
+        </div>
+        <div class="when">2022 – Present</div>
+        <ul>
+          <li>Major: Information Systems, Business Analytics — Senior — GPA 3.62</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div>
+          <h3>Greenwood High School</h3>
+          <div class="place">Greenwood, Arkansas</div>
+        </div>
+        <div class="when">May 2022</div>
+        <ul>
+          <li>High School Diploma — GPA 4.0</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="honors">
+      <div class="sec-head"><h2>Honors &amp; Awards</h2></div>
+      <ul class="honors">
+        <li><span class="mark">§</span><span>Dean's List</span><span class="when">Fall 2023 – Spring 2024</span></li>
+        <li><span class="mark">§</span><span>Donald E. Hall Memorial Scholarship Recipient</span><span class="when">May 2023 – Present</span></li>
+        <li><span class="mark">§</span><span>University of Arkansas Leadership Scholarship Recipient</span><span class="when">May 2022 – Present</span></li>
+        <li><span class="mark">§</span><span>Arkansas Lottery Challenge Scholarship Recipient</span><span class="when">May 2022 – Present</span></li>
+      </ul>
+    </section>
+
+    <section id="skills">
+      <div class="sec-head"><h2>Skillset</h2></div>
+      <div class="skills">
+        <span>Microsoft Office Suite</span>
+        <span>Adobe Suite</span>
+        <span>QuickBooks</span>
+        <span>SAS Viya</span>
+        <span>Tableau</span>
+        <span>Written &amp; verbal communication</span>
+        <span>Punctual &amp; diligent</span>
+        <span>Creative problem-solving</span>
+      </div>
+    </section>
+
+    <footer>Rhett Clements · Greenwood, Arkansas · clementsrhett@gmail.com</footer>
+  </main>
+</div>
+</body>
+</html>
