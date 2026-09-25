@@ -205,7 +205,13 @@ function About() {
               My background has taught me to be both detail-oriented and adaptable. Whether I&apos;m organizing a space, learning a new tool, or contributing to a team, I bring a steady presence and a genuine willingness to learn.
             </p>
           </Reveal>
-          <Reveal delay="reveal-delay-2" className="mt-10 flex flex-wrap gap-2">
+          <Reveal delay="reveal-delay-2" className="mt-9 border-l-2 border-accent pl-5" data-testid="text-career-goals">
+            <p className="font-mono-ui text-[9px] uppercase tracking-[0.15em] text-accent">Looking ahead</p>
+            <p className="mt-3 max-w-3xl text-base leading-[1.8] text-muted-foreground">
+              My goal is to bring my graphic design skills into a more business-oriented workplace and stay ahead of the AI revolution. I&apos;m interested in using AI efficiently to make better use of available resources in a changing marketplace.
+            </p>
+          </Reveal>
+          <Reveal delay="reveal-delay-3" className="mt-10 flex flex-wrap gap-2">
             {['Analytical', 'Dependable', 'Creative', 'Clear communicator'].map((label) => (
               <span key={label} className="border border-foreground/20 px-3 py-2 font-mono-ui text-[9px] uppercase tracking-[0.13em] text-foreground/75" data-testid={`tag-quality-${label.toLowerCase().replaceAll(' ', '-')}`}>
                 {label}
