@@ -282,11 +282,36 @@ function Experience() {
 
 function Toolkit() {
   const skills = [
-    { name: 'Microsoft Office Suite', note: 'Everyday productivity' },
-    { name: 'Adobe Suite', note: 'Creative communication' },
-    { name: 'QuickBooks', note: 'Business fundamentals' },
-    { name: 'SAS Viya', note: 'Analytics software' },
-    { name: 'Tableau', note: 'Analytics software' },
+    {
+      name: 'Microsoft Office Suite',
+      note: 'Everyday productivity',
+      benefit: 'Organize information, prepare clear reports, and communicate findings through documents, spreadsheets, and presentations.',
+      example: 'Excel budget + PowerPoint summary',
+    },
+    {
+      name: 'Adobe Suite',
+      note: 'Creative communication',
+      benefit: 'Create polished visual materials that strengthen brand communication, marketing, and presentation storytelling.',
+      example: 'Branded campaign materials',
+    },
+    {
+      name: 'QuickBooks',
+      note: 'Business fundamentals',
+      benefit: 'Keep financial activity organized by tracking income and expenses, preparing invoices, and supporting bookkeeping workflows.',
+      example: 'Expense and cash-flow overview',
+    },
+    {
+      name: 'SAS Viya',
+      note: 'Analytics software',
+      benefit: 'Explore datasets with statistical tools to find patterns and support evidence-based business decisions.',
+      example: 'Customer trend analysis',
+    },
+    {
+      name: 'Tableau',
+      note: 'Analytics software',
+      benefit: 'Turn data into interactive charts and dashboards that help teams spot trends and communicate performance.',
+      example: 'Interactive KPI dashboard',
+    },
   ];
 
   return (
@@ -310,7 +335,7 @@ function Toolkit() {
             </Reveal>
             <Reveal delay="reveal-delay-1" className="mt-8 max-w-2xl">
               <p className="text-base leading-[1.8] text-muted-foreground">
-                I&apos;m building fluency across business, creative, and analytics tools — with a focus on using them clearly and responsibly.
+                I&apos;m building fluency across business, creative, and analytics tools. Each can help teams organize information, communicate clearly, and make better-informed decisions.
               </p>
             </Reveal>
             <div className="mt-12 grid gap-px border border-foreground/15 bg-foreground/15 sm:grid-cols-2">
@@ -324,6 +349,12 @@ function Toolkit() {
                     </div>
                     <Sparkles size={16} className="mt-1 text-accent" />
                   </div>
+                  <p className="mt-5 text-sm leading-[1.7] text-muted-foreground" data-testid={`text-tool-benefit-${index + 1}`}>
+                    {skill.benefit}
+                  </p>
+                  <p className="mt-4 border-t border-foreground/10 pt-3 font-mono-ui text-[9px] uppercase leading-[1.6] tracking-[0.1em] text-foreground/70" data-testid={`text-tool-example-${index + 1}`}>
+                    Illustrative use · {skill.example}
+                  </p>
                 </Reveal>
               ))}
             </div>
