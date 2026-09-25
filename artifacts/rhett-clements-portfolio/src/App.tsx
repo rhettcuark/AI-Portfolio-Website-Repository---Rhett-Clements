@@ -163,9 +163,9 @@ function Hero() {
       </div>
       <div className="mx-auto grid max-w-[1440px] grid-cols-2 border-t border-foreground/15 sm:grid-cols-4">
         {[
-          ['3.62', 'Current GPA'],
-          ['Senior', 'At the University of Arkansas'],
-          ['2022', 'Started in Fayetteville'],
+          ['3.62', 'Undergraduate GPA'],
+          ['2026', "Bachelor's in Business Analytics"],
+          ["Master's", 'Product Innovation · in progress'],
           ['AR', 'Rooted in Greenwood'],
         ].map(([value, label], index) => (
           <div key={value} className={`border-r border-foreground/15 px-5 py-6 last:border-r-0 sm:px-8 lg:px-12 ${index > 1 ? 'border-t sm:border-t-0' : ''}`} data-testid={`stat-${index}`}>
@@ -199,7 +199,7 @@ function About() {
           </Reveal>
           <Reveal delay="reveal-delay-1" className="mt-10 grid gap-8 border-t border-foreground/15 pt-8 sm:grid-cols-2">
             <p className="text-base leading-[1.8] text-muted-foreground" data-testid="text-about-primary">
-              I&apos;m studying Information Systems Business Analytics at the University of Arkansas, building the practical habits behind useful work: paying attention, communicating early, and staying with a problem until it makes sense.
+              I graduated from the University of Arkansas in 2026 with a bachelor&apos;s degree in Business Analytics. I&apos;m now pursuing a master&apos;s in Product Innovation at the same university.
             </p>
             <p className="text-base leading-[1.8] text-muted-foreground" data-testid="text-about-secondary">
               My background has taught me to be both detail-oriented and adaptable. Whether I&apos;m organizing a space, learning a new tool, or contributing to a team, I bring a steady presence and a genuine willingness to learn.
@@ -346,12 +346,21 @@ function Education() {
           <Reveal>
             <div className="border-t border-foreground/15 pt-6">
               <GraduationCap size={23} className="text-accent" />
-              <p className="mt-7 font-mono-ui text-[10px] uppercase tracking-[0.14em] text-muted-foreground">2022 — Present</p>
+              <p className="mt-7 font-mono-ui text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Bachelor&apos;s &amp; master&apos;s programs</p>
               <h2 className="mt-4 font-display text-4xl leading-none tracking-[-0.025em] sm:text-5xl">University of Arkansas</h2>
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground">Sam M. Walton College of Business<br />Information Systems Business Analytics · Senior</p>
-              <div className="mt-8 inline-flex items-baseline gap-3 border-l-2 border-accent pl-4">
-                <span className="font-display text-4xl text-accent">3.62</span>
-                <span className="font-mono-ui text-[9px] uppercase tracking-[0.12em] text-muted-foreground">GPA</span>
+              <div className="mt-7 space-y-7">
+                <div className="border-l-2 border-accent pl-4">
+                  <p className="font-mono-ui text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Bachelor&apos;s degree · Graduated 2026</p>
+                  <p className="mt-2 text-base leading-relaxed text-foreground">Business Analytics</p>
+                  <div className="mt-4 inline-flex items-baseline gap-3">
+                    <span className="font-display text-3xl text-accent">3.62</span>
+                    <span className="font-mono-ui text-[9px] uppercase tracking-[0.12em] text-muted-foreground">Undergraduate GPA</span>
+                  </div>
+                </div>
+                <div className="border-l-2 border-foreground/20 pl-4">
+                  <p className="font-mono-ui text-[9px] uppercase tracking-[0.14em] text-accent">Currently attending</p>
+                  <p className="mt-2 text-base leading-relaxed text-foreground">Master&apos;s in Product Innovation</p>
+                </div>
               </div>
             </div>
           </Reveal>
