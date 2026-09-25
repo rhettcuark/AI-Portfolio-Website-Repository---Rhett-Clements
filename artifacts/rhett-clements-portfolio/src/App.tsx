@@ -7,6 +7,7 @@ import {
   BarChart3,
   Check,
   ChevronDown,
+  Download,
   ExternalLink,
   GraduationCap,
   Mail,
@@ -49,6 +50,7 @@ const inquirySchema = z.object({
 });
 
 type InquiryValues = z.infer<typeof inquirySchema>;
+const portfolioPdfHref = `${import.meta.env.BASE_URL}portfolio.pdf`;
 
 function Reveal({ children, className = '', delay = '' }: { children: ReactNode; className?: string; delay?: string }) {
   return <div className={`reveal ${delay} ${className}`}>{children}</div>;
@@ -74,7 +76,7 @@ function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-foreground/10 bg-background/90 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-foreground/10 bg-background/90 backdrop-blur-md" data-print-hide="true">
       <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
         <a href="#top" className="focus-ring flex items-center gap-3" data-testid="link-logo">
           <LogoMark />
@@ -87,9 +89,14 @@ function Header() {
             </a>
           ))}
         </nav>
-        <a href="mailto:clementsrhett@gmail.com" className="focus-ring hidden items-center gap-2 border border-foreground/20 px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground sm:flex" data-testid="link-header-email">
-          Let&apos;s connect <ArrowUpRight size={13} />
-        </a>
+        <div className="hidden items-center gap-2 sm:flex">
+          <a href={portfolioPdfHref} download="Rhett-Clements-Portfolio.pdf" className="focus-ring inline-flex items-center gap-2 border border-accent px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] text-accent transition-colors hover:bg-accent hover:text-accent-foreground" data-testid="link-header-download">
+            Download PDF <Download size={13} />
+          </a>
+          <a href="mailto:clementsrhett@gmail.com" className="focus-ring inline-flex items-center gap-2 border border-foreground/20 px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground" data-testid="link-header-email">
+            Let&apos;s connect <ArrowUpRight size={13} />
+          </a>
+        </div>
         <button type="button" className="focus-ring flex h-10 w-10 items-center justify-center md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} onClick={() => setOpen(!open)} data-testid="button-mobile-menu">
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -104,6 +111,9 @@ function Header() {
             ))}
             <a href="mailto:clementsrhett@gmail.com" onClick={() => setOpen(false)} className="focus-ring flex items-center gap-2 font-mono-ui text-[11px] uppercase tracking-[0.16em] text-accent" data-testid="link-mobile-email">
               Email Rhett <Mail size={14} />
+            </a>
+            <a href={portfolioPdfHref} download="Rhett-Clements-Portfolio.pdf" onClick={() => setOpen(false)} className="focus-ring flex items-center justify-between border border-accent px-4 py-3 font-mono-ui text-[11px] uppercase tracking-[0.16em] text-accent" data-testid="link-mobile-download">
+              Download portfolio PDF <Download size={15} />
             </a>
           </div>
         </nav>
@@ -160,6 +170,9 @@ function Hero() {
             </a>
             <a href="mailto:clementsrhett@gmail.com" className="focus-ring inline-flex items-center gap-2 border-b border-foreground/40 pb-2 font-mono-ui text-[10px] uppercase tracking-[0.16em] transition-colors hover:border-accent hover:text-accent" data-testid="link-hero-contact">
               Get in touch <ArrowUpRight size={15} />
+            </a>
+            <a href={portfolioPdfHref} download="Rhett-Clements-Portfolio.pdf" className="focus-ring inline-flex items-center gap-2 border-b border-foreground/40 pb-2 font-mono-ui text-[10px] uppercase tracking-[0.16em] transition-colors hover:border-accent hover:text-accent" data-testid="link-hero-download">
+              Download portfolio PDF <Download size={14} />
             </a>
           </Reveal>
         </div>
@@ -597,7 +610,9 @@ function Contact() {
               </a>
             </div>
           </div>
-          <InquiryPanel />
+          <div data-print-hide="true">
+            <InquiryPanel />
+          </div>
         </Reveal>
       </div>
     </section>
