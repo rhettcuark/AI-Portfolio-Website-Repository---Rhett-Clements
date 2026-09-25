@@ -14,6 +14,7 @@ import {
   Sparkles,
   X,
 } from 'lucide-react';
+import profilePortrait from '@assets/Screenshot_2026-01-14_133703_1790342698760.png';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
@@ -144,17 +145,13 @@ function Hero() {
         <div className="relative flex min-h-[340px] items-center justify-center lg:min-h-0">
           <div className="absolute right-[8%] top-[7%] h-64 w-64 rounded-full border border-foreground/15 sm:h-80 sm:w-80" />
           <div className="absolute right-[18%] top-[18%] h-44 w-44 rounded-full border border-accent/45 sm:h-56 sm:w-56" />
-          <div className="hero-mark relative z-10 flex h-56 w-56 rotate-[-7deg] items-center justify-center border border-foreground/25 bg-accent p-8 text-accent-foreground shadow-[14px_14px_0_hsl(var(--primary))] sm:h-64 sm:w-64">
-            <div className="text-center">
-              <BarChart3 size={36} strokeWidth={1.3} className="mx-auto mb-7" />
-              <p className="font-mono-ui text-[10px] uppercase leading-[1.8] tracking-[0.18em]">
-                People
-                <br />
-                + systems
-                <br />
-                + curiosity
-              </p>
-            </div>
+          <div className="hero-mark relative z-10 h-[18rem] w-[14rem] rotate-[-7deg] overflow-hidden border border-foreground/25 bg-accent shadow-[14px_14px_0_hsl(var(--primary))] sm:h-[20rem] sm:w-[15rem]">
+            <img
+              src={profilePortrait}
+              alt="Portrait of Rhett Clements"
+              className="h-full w-full scale-x-[1.45] object-cover object-[center_44%] saturate-[0.72]"
+              data-testid="img-profile"
+            />
           </div>
           <div className="absolute bottom-[8%] left-[3%] flex items-center gap-2 font-mono-ui text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
             <span className="h-2 w-2 bg-accent" /> 35° 19&apos; N / 94° 24&apos; W
