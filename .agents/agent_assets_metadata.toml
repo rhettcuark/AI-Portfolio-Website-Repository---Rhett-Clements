@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "cF9PlZKHEJqnyJ0NxmY0J"
+uri = "file://artifacts/rhett-clements-portfolio/public/portfolio.pdf"
+type = "pdf"
+title = "Rhett Clements Portfolio PDF"
+description = "Downloadable portfolio with the latest contact links; inquiry form excluded."
+logical_id = "02a7a6ff-708c-4665-9e3e-db3654457460"
+content_hash = "sha256:768f2be7a883a58867f1757fb49db473da1a075db2fd2e96f941436707ed7460"
+size = 381484
+mtime_ms = 1790395409352
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:666230d0-9f9a-4919-9089-5afe84e9b40f/02a7a6ff-708c-4665-9e3e-db3654457460/90a22e0b-25eb-4b49-b6e4-9fa4b96b0d3f"
+storage_version_token = "1790395505365502"
+content_type = "application/pdf"

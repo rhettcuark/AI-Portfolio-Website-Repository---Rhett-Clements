@@ -93,7 +93,7 @@ function Header() {
           <a href={portfolioPdfHref} download="Rhett-Clements-Portfolio.pdf" className="focus-ring inline-flex items-center gap-2 border border-accent px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] text-accent transition-colors hover:bg-accent hover:text-accent-foreground" data-testid="link-header-download">
             Download PDF <Download size={13} />
           </a>
-          <a href="mailto:clementsrhett@gmail.com" className="focus-ring inline-flex items-center gap-2 border border-foreground/20 px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground" data-testid="link-header-email">
+          <a href="mailto:clementsrhett@gmail.com" className="focus-ring hidden items-center gap-2 border border-foreground/20 px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground lg:inline-flex" data-testid="link-header-email">
             Let&apos;s connect <ArrowUpRight size={13} />
           </a>
         </div>
@@ -607,6 +607,9 @@ function Contact() {
               </a>
               <a href="https://www.linkedin.com/in/clementsrhettjba/" target="_blank" rel="noreferrer" className="focus-ring flex items-center gap-3 font-mono-ui text-sm tracking-[0.04em] transition-transform hover:translate-x-1" data-testid="link-contact-linkedin">
                 <ExternalLink size={18} /> LinkedIn <ArrowUpRight size={16} />
+              </a>
+              <a href="https://x.com/Rhettac70" target="_blank" rel="noopener noreferrer" className="focus-ring flex items-center gap-3 font-mono-ui text-sm tracking-[0.04em] transition-transform hover:translate-x-1" data-testid="link-contact-x" aria-label="Rhett Clements on X, @Rhettac70">
+                <ExternalLink size={18} /> X · @Rhettac70 <ArrowUpRight size={16} />
               </a>
             </div>
           </div>
