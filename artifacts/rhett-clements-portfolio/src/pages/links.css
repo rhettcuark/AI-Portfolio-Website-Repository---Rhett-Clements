@@ -1,0 +1,52 @@
+.links-page {
+  background:
+    linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), hsl(var(--foreground) / 0.035) calc(100% - 1px)),
+    hsl(var(--background));
+  background-size: 100% 100%;
+}
+
+.links-page::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  opacity: 0.25;
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+
+.links-content {
+  animation: links-arrive 620ms cubic-bezier(.2,.75,.25,1) both;
+}
+
+.links-row {
+  transition: transform 220ms cubic-bezier(.2,.75,.25,1), background-color 220ms ease, border-color 220ms ease;
+}
+
+.links-row:hover {
+  transform: translateX(4px);
+}
+
+.links-stamp {
+  transform: rotate(-7deg);
+  transition: transform 420ms cubic-bezier(.2,.75,.25,1);
+}
+
+.links-stamp:hover {
+  transform: rotate(0deg);
+}
+
+@keyframes links-arrive {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .links-content { animation: none; }
+  .links-row, .links-stamp { transition: none; }
+  .links-row:hover, .links-stamp:hover { transform: none; }
+}

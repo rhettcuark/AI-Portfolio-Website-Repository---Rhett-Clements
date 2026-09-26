@@ -1,6 +1,4 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -8,48 +6,28 @@ import {
   Check,
   ChevronDown,
   Download,
-  ExternalLink,
   GraduationCap,
-  Mail,
   MapPin,
   Menu,
-  Phone,
   Sparkles,
   X,
 } from 'lucide-react';
 import profilePortrait from '@assets/Screenshot_2026-01-14_133703_1790342698760.png';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
 import { ErrorBoundary } from '@/components/error-boundary';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
+import LinksPage from '@/pages/links';
 import {
+  Link,
   Route,
   Switch,
   useLocation,
   Router as WouterRouter,
 } from 'wouter';
-import { z } from 'zod';
 
 const queryClient = new QueryClient();
-const inquirySchema = z.object({
-  name: z.string().trim().min(1, 'Enter your name').max(80, 'Keep your name under 80 characters'),
-  email: z.string().trim().email('Enter a valid email address').max(254, 'Email address is too long'),
-  message: z.string().trim().min(10, 'Please add a little more detail').max(2000, 'Keep your message under 2,000 characters'),
-});
-
-type InquiryValues = z.infer<typeof inquirySchema>;
 const portfolioPdfHref = `${import.meta.env.BASE_URL}portfolio.pdf`;
 
 function Reveal({ children, className = '', delay = '' }: { children: ReactNode; className?: string; delay?: string }) {
@@ -93,9 +71,9 @@ function Header() {
           <a href={portfolioPdfHref} download="Rhett-Clements-Portfolio.pdf" className="focus-ring inline-flex items-center gap-2 border border-accent px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] text-accent transition-colors hover:bg-accent hover:text-accent-foreground" data-testid="link-header-download">
             Download PDF <Download size={13} />
           </a>
-          <a href="mailto:clementsrhett@gmail.com" className="focus-ring hidden items-center gap-2 border border-foreground/20 px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground lg:inline-flex" data-testid="link-header-email">
+          <Link href="/links" className="focus-ring hidden items-center gap-2 border border-foreground/20 px-4 py-2 font-mono-ui text-[10px] uppercase tracking-[0.13em] transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground lg:inline-flex" data-testid="link-header-contact">
             Let&apos;s connect <ArrowUpRight size={13} />
-          </a>
+          </Link>
         </div>
         <button type="button" className="focus-ring flex h-10 w-10 items-center justify-center md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} onClick={() => setOpen(!open)} data-testid="button-mobile-menu">
           {open ? <X size={20} /> : <Menu size={20} />}
@@ -109,9 +87,9 @@ function Header() {
                 {item.label} <ArrowUpRight size={15} className="text-accent" />
               </a>
             ))}
-            <a href="mailto:clementsrhett@gmail.com" onClick={() => setOpen(false)} className="focus-ring flex items-center gap-2 font-mono-ui text-[11px] uppercase tracking-[0.16em] text-accent" data-testid="link-mobile-email">
-              Email Rhett <Mail size={14} />
-            </a>
+            <Link href="/links" onClick={() => setOpen(false)} className="focus-ring flex items-center gap-2 font-mono-ui text-[11px] uppercase tracking-[0.16em] text-accent" data-testid="link-mobile-contact">
+              Contact Rhett <ArrowUpRight size={14} />
+            </Link>
             <a href={portfolioPdfHref} download="Rhett-Clements-Portfolio.pdf" onClick={() => setOpen(false)} className="focus-ring flex items-center justify-between border border-accent px-4 py-3 font-mono-ui text-[11px] uppercase tracking-[0.16em] text-accent" data-testid="link-mobile-download">
               Download portfolio PDF <Download size={15} />
             </a>
@@ -168,9 +146,9 @@ function Hero() {
             <a href="#experience" className="focus-ring inline-flex items-center gap-3 bg-primary px-5 py-3 font-mono-ui text-[10px] uppercase tracking-[0.16em] text-primary-foreground transition-transform hover:-translate-y-0.5" data-testid="link-hero-experience">
               See the work <ArrowDownRight size={16} />
             </a>
-            <a href="mailto:clementsrhett@gmail.com" className="focus-ring inline-flex items-center gap-2 border-b border-foreground/40 pb-2 font-mono-ui text-[10px] uppercase tracking-[0.16em] transition-colors hover:border-accent hover:text-accent" data-testid="link-hero-contact">
+            <Link href="/links" className="focus-ring inline-flex items-center gap-2 border-b border-foreground/40 pb-2 font-mono-ui text-[10px] uppercase tracking-[0.16em] transition-colors hover:border-accent hover:text-accent" data-testid="link-hero-contact">
               Get in touch <ArrowUpRight size={15} />
-            </a>
+            </Link>
             <a href={portfolioPdfHref} download="Rhett-Clements-Portfolio.pdf" className="focus-ring inline-flex items-center gap-2 border-b border-foreground/40 pb-2 font-mono-ui text-[10px] uppercase tracking-[0.16em] transition-colors hover:border-accent hover:text-accent" data-testid="link-hero-download">
               Download portfolio PDF <Download size={14} />
             </a>
@@ -459,117 +437,6 @@ function Education() {
   );
 }
 
-function InquiryPanel() {
-  const form = useForm<InquiryValues>({
-    resolver: zodResolver(inquirySchema),
-    defaultValues: { name: '', email: '', message: '' },
-  });
-
-  const handleSubmit = (values: InquiryValues) => {
-    const query = new URLSearchParams({
-      subject: `Portfolio inquiry from ${values.name}`,
-      body: `Name: ${values.name}\nEmail: ${values.email}\n\n${values.message}`,
-    });
-
-    window.location.href = `mailto:clementsrhett@gmail.com?${query.toString()}`;
-  };
-
-  return (
-    <div className="border border-foreground/10 bg-background p-6 text-foreground shadow-[12px_12px_0_hsl(var(--primary))] sm:p-8" data-testid="panel-inquiry">
-      <div className="flex items-start justify-between gap-5 border-b border-foreground/15 pb-5">
-        <div>
-          <p className="font-mono-ui text-[9px] uppercase tracking-[0.18em] text-accent">Inquiry</p>
-          <h3 className="mt-3 font-display text-3xl leading-none tracking-[-0.02em] sm:text-4xl">Send a message</h3>
-        </div>
-        <Mail size={20} className="mt-1 shrink-0 text-accent" aria-hidden="true" />
-      </div>
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="mt-6 space-y-5" data-testid="form-inquiry">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-mono-ui text-[9px] uppercase tracking-[0.12em]">Your name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      autoComplete="name"
-                      maxLength={80}
-                      placeholder="Name"
-                      className="mt-1 h-11 rounded-none border-foreground/20 bg-transparent text-foreground shadow-none placeholder:text-muted-foreground/70 focus-visible:ring-accent"
-                      data-testid="input-inquiry-name"
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs text-muted-foreground">How should I address you?</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-mono-ui text-[9px] uppercase tracking-[0.12em]">Email address</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="email"
-                      autoComplete="email"
-                      maxLength={254}
-                      placeholder="you@example.com"
-                      className="mt-1 h-11 rounded-none border-foreground/20 bg-transparent text-foreground shadow-none placeholder:text-muted-foreground/70 focus-visible:ring-accent"
-                      data-testid="input-inquiry-email"
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs text-muted-foreground">So I can reply to you.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormField
-            control={form.control}
-            name="message"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-mono-ui text-[9px] uppercase tracking-[0.12em]">Your message</FormLabel>
-                <FormControl>
-                  <Textarea
-                    {...field}
-                    rows={5}
-                    maxLength={2000}
-                    placeholder="What would you like to discuss?"
-                    className="mt-1 min-h-32 resize-y rounded-none border-foreground/20 bg-transparent text-foreground shadow-none placeholder:text-muted-foreground/70 focus-visible:ring-accent"
-                    data-testid="input-inquiry-message"
-                  />
-                </FormControl>
-                <FormDescription className="text-xs text-muted-foreground">Add a little context or your question.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="flex flex-col gap-4 border-t border-foreground/15 pt-5 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
-              This opens your email app with a draft. Nothing is sent until you review and send it.
-            </p>
-            <button
-              type="submit"
-              className="focus-ring inline-flex shrink-0 items-center justify-center gap-3 bg-primary px-5 py-3 font-mono-ui text-[10px] uppercase tracking-[0.13em] text-primary-foreground transition-transform hover:-translate-y-0.5"
-              data-testid="button-submit-inquiry"
-            >
-              Open email draft <ArrowUpRight size={15} />
-            </button>
-          </div>
-        </form>
-      </Form>
-    </div>
-  );
-}
-
 function Contact() {
   return (
     <section id="contact" className="bg-accent text-accent-foreground" data-testid="section-contact">
@@ -588,34 +455,16 @@ function Contact() {
             <em>things through.</em>
           </h2>
         </Reveal>
-        <Reveal delay="reveal-delay-2" className="mt-12 grid gap-12 border-t border-accent-foreground/30 pt-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <div className="flex flex-col justify-between gap-10">
-            <div>
-              <p className="max-w-md text-base leading-[1.75] text-accent-foreground/75">
-                Looking for an early-career opportunity where I can keep learning, contribute to a team, and do work that holds up.
-              </p>
-              <p className="mt-5 font-mono-ui text-[9px] uppercase leading-[1.7] tracking-[0.12em] text-accent-foreground/60">
-                Or reach me directly
-              </p>
-            </div>
-            <div className="flex flex-col items-start gap-4">
-              <a href="mailto:clementsrhett@gmail.com" className="focus-ring flex items-center gap-3 font-mono-ui text-sm tracking-[0.04em] transition-transform hover:translate-x-1" data-testid="link-contact-email">
-                <Mail size={18} /> clementsrhett@gmail.com <ArrowUpRight size={16} />
-              </a>
-              <a href="tel:+14798062587" className="focus-ring flex items-center gap-3 font-mono-ui text-sm tracking-[0.04em] transition-transform hover:translate-x-1" data-testid="link-contact-phone">
-                <Phone size={18} /> 479-806-2587 <ArrowUpRight size={16} />
-              </a>
-              <a href="https://www.linkedin.com/in/clementsrhettjba/" target="_blank" rel="noreferrer" className="focus-ring flex items-center gap-3 font-mono-ui text-sm tracking-[0.04em] transition-transform hover:translate-x-1" data-testid="link-contact-linkedin">
-                <ExternalLink size={18} /> LinkedIn <ArrowUpRight size={16} />
-              </a>
-              <a href="https://x.com/Rhettac70" target="_blank" rel="noopener noreferrer" className="focus-ring flex items-center gap-3 font-mono-ui text-sm tracking-[0.04em] transition-transform hover:translate-x-1" data-testid="link-contact-x" aria-label="Rhett Clements on X, @Rhettac70">
-                <ExternalLink size={18} /> X · @Rhettac70 <ArrowUpRight size={16} />
-              </a>
-            </div>
-          </div>
-          <div data-print-hide="true">
-            <InquiryPanel />
-          </div>
+        <Reveal delay="reveal-delay-2" className="mt-12 flex flex-col items-start gap-8 border-t border-accent-foreground/30 pt-8 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-lg text-base leading-[1.75] text-accent-foreground/80">
+            Looking for an early-career opportunity where I can keep learning, contribute to a team, and do work that holds up. All the ways to reach me are in one place.
+          </p>
+          <Link href="/links" className="focus-ring inline-flex min-h-12 shrink-0 items-center gap-4 border border-accent-foreground px-6 py-3 font-mono-ui text-[11px] uppercase tracking-[0.12em] transition-colors hover:bg-accent-foreground hover:text-accent" data-testid="link-contact-links" data-print-hide="true">
+            Contact &amp; message me <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
+          <p className="hidden font-mono-ui text-[10px] uppercase tracking-[0.12em] print:block">
+            Contact and messaging: visit the /links page on this site.
+          </p>
         </Reveal>
       </div>
     </section>
@@ -676,6 +525,7 @@ function Router() {
     <RoutedErrorBoundary>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/links" component={LinksPage} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
