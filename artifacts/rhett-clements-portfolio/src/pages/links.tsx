@@ -32,6 +32,8 @@ const inquirySchema = z.object({
 });
 
 type InquiryValues = z.infer<typeof inquirySchema>;
+const portfolioSiteUrl = 'https://rhett-clements-portfolio--rhettc1.replit.app/';
+const portfolioQrSrc = `${import.meta.env.BASE_URL}profile-qr.svg`;
 
 const contactLinks = [
   {
@@ -304,6 +306,29 @@ export default function LinksPage() {
                     <ArrowUpRight size={15} className="shrink-0 text-foreground/45 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" aria-hidden="true" />
                   </a>
                 ))}
+              </div>
+            </section>
+
+            <section aria-labelledby="portfolio-qr-heading" className="mb-8 border border-foreground/20 bg-background/70 p-4 sm:mb-10 sm:p-5" data-testid="section-portfolio-qr">
+              <div className="flex flex-col gap-5 min-[400px]:flex-row min-[400px]:items-center min-[400px]:justify-between">
+                <div className="min-w-0">
+                  <p className="font-mono-ui text-[9px] uppercase tracking-[0.18em] text-accent">Take the portfolio with you</p>
+                  <h2 id="portfolio-qr-heading" className="mt-2 font-display text-3xl leading-none tracking-[-0.025em]">Scan my profile</h2>
+                  <p className="mt-3 max-w-[240px] text-sm leading-relaxed text-muted-foreground">
+                    Point your camera here to open my portfolio site.
+                  </p>
+                  <a href={portfolioSiteUrl} target="_blank" rel="noopener noreferrer" className="focus-ring mt-4 inline-flex min-h-11 items-center gap-2 font-mono-ui text-[9px] uppercase tracking-[0.1em] text-accent underline underline-offset-4 transition-colors hover:text-foreground" data-testid="link-published-portfolio">
+                    Open portfolio instead <ArrowUpRight size={14} aria-hidden="true" />
+                  </a>
+                </div>
+                <img
+                  src={portfolioQrSrc}
+                  alt="QR code for Rhett Clements's published portfolio website"
+                  width={152}
+                  height={152}
+                  className="h-[152px] w-[152px] shrink-0 self-center bg-white p-2"
+                  data-testid="img-portfolio-qr"
+                />
               </div>
             </section>
 
